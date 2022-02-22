@@ -1,17 +1,21 @@
 <h2>List of Messages</h2>
------------------------------------------------------------------------------------------
-<table style="width:30%">
-  <tr>
-    <th>Message Id</th>
-    <th>currencyFrom</th>
-    <th>currencyTo</th>
-    <th>User</th>
-  </tr>
-
-  <tr *ngFor="let md of marketDataList">
-    <td>{{md.id}}</td>
-    <td>{{md.currencyFrom}}</td>
-    <td>{{md.currencyTo}}</td>
-    <td>{{md.userId}}</td>
-  </tr>
-</table>
+<div data-spy="scroll" >
+  <table class="table table-striped" width="30%">
+    <thead>
+      <tr>
+        <th scope="col">Message Id</th>
+        <th scope="col">currencyFrom</th>
+        <th scope="col">currencyTo</th>
+        <th scope="col">User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of marketDataList">
+        <td scope="row">{{data.id}}</td>
+        <td scope="row">{{data.currencyFrom}}</td>
+        <td scope="row">{{data.currencyTo}}</td>
+        <td scope="row">{{data.userId}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
