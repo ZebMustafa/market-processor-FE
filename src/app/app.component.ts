@@ -18,22 +18,38 @@ export class AppComponent implements OnInit {
     this.websocketAPIService = new WebsocketApiService(this.shareDataService);
   }
   public marketDataList: MarketData[] = [];
-  greeting: any;
+  exchangePairModel: any;
+  message: any;
   name: string | undefined;
+  public options: any;
+  data = []
 
   ngOnInit() {
-    // this.shareDataService
-    //   .currentMessage
-    //   .subscribe(message => {
-    //     this.greeting = message
-    //     console.log(this.greeting);
-    //   }); //<= Always get current value!
 
-    console.log('Calling message apis at backend');
+    this.subscibeToSharedService();
+    this.options = {
+      data: this.data,
+      series: [{
+        xKey: 'timePlaced',
+        yKey: 'rate',
+      }],
+    };
+
     this.getList();
 
-    console.log("Connecting to web socket:");
+    this.getExchangePairData();
+
     this.connect();
+  }
+  
+  subscibeToSharedService() {
+
+    this.shareDataService
+      .currentMessage
+      .subscribe(message => {
+        this.handleMessage(message);
+        this.getExchangePairData();
+      });
   }
 
   getList(): void {
@@ -48,6 +64,19 @@ export class AppComponent implements OnInit {
       });
   }
 
+  getExchangePairData() {
+    this.restApiService.getExchangePairData()
+      .subscribe({
+        next: (data) => {
+          this.exchangePairModel = data;
+          this.options = {
+            data: this.exchangePairModel.exchangeRateList
+          }
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
   connect() {
     this.websocketAPIService._connect();
   }
@@ -57,6 +86,9 @@ export class AppComponent implements OnInit {
   }
 
   handleMessage(message: any) {
-    this.greeting = message;
+    if (Object.keys(message).length != 0) {
+      this.message = JSON.parse(message);
+      this.marketDataList.push(this.message);
+    }
   }
 }

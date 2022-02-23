@@ -6,8 +6,9 @@ export class SharedDataService {
     private messageSource = new BehaviorSubject(this.editDataDetails);
     currentMessage = this.messageSource.asObservable();
     
-    shareReceivedMessage(message: string) {
-        console.log("Messgae has been recieved");
+    shareReceivedMessage(message: any) {
+        console.log("Message Received:");
+        console.log(message);
         this.messageSource.next(message)
     }
 }

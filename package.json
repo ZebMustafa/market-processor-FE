@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@stomp/stompjs": "^6.1.2",
+    "ag-charts-angular": "^5.0.0",
+    "ag-charts-community": "^5.0.0",
     "net": "^1.0.2",
     "ng2-stomp-service": "^1.2.2",
     "rxjs": "~7.5.0",

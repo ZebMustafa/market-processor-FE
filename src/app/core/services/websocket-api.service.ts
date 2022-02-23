@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { AppComponent } from 'src/app/app.component';
 import { SharedDataService } from '../../shared/shared.data.service';
 
 
